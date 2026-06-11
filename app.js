@@ -291,6 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollReveal();
   initContactForm();
   initActiveNavLinkOnScroll();
+  initTechLogsBackground();
 });
 
 /* ==========================================================================
@@ -563,4 +564,167 @@ function initActiveNavLinkOnScroll() {
   function varHeaderOffset() {
     return window.innerWidth <= 768 ? 80 : 100;
   }
+}
+
+/* ==========================================================================
+   DYNAMIC TECH LOGS CANVAS BACKGROUND
+   ========================================================================== */
+function initTechLogsBackground() {
+  const canvas = document.getElementById("tech-logs-canvas");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  // Array of developer/compilation/system logs and tech strings
+  const logsList = [
+    "dotnet build --configuration Release",
+    "Docker: Container pnp-db-1 started on port 1433",
+    "Spring Boot: Tomcat started on port(s) 8080 (http)",
+    "Angular: Compiled successfully. Build at 2026-06-11",
+    "git commit -m \"feat: implement modules of suspended PNP\"",
+    "SELECT personal_id, nombre, rango FROM tbl_personales;",
+    "Blazor WebAssembly: loaded 12.4 MB resources",
+    "System.Console.WriteLine(\"Hola Mundo!\");",
+    "public class Programador { public string Nombre => \"Josue\"; }",
+    "npm install @angular/core@19",
+    "UPC Systems Engineering: Course Web Development enrolled",
+    "Dirrehum module: Personal.Suspended.cs compiled",
+    "[SUCCESS] Build successful in 4.21s",
+    "[DEBUG] JWT token validated for user josue1202",
+    "docker-compose up -d --build",
+    "git push origin main",
+    "C# / .NET / Blazor / SQL Server",
+    "Java / Spring Boot / Hibernate",
+    "Angular / TypeScript / CSS3",
+    "Kotlin / Android SDK / Retrofit",
+    "Scrum: Daily standup starting in 5m",
+    "REST API GET /api/v1/certificates",
+    "const dev = new FullStackDeveloper(\"Josue Villagaray\");",
+    "npm run dev --host 0.0.0.0",
+    "GET /api/v1/personales/1202 - 200 OK",
+    "Blazor WebAssembly client initialized successfully",
+    "mvn clean install",
+    "Database connected: SQL Server / MySQL",
+    "[INFO] Building system-gestion-pnp 1.0.0-SNAPSHOT",
+    "git merge feature/suspended-officers",
+    "const root = ReactDOM.createRoot(document.getElementById('root'));",
+    "Entity Framework Core: Migrations applied to DirrehumDb",
+    "HTTP/1.1 201 Created - POST /api/v1/contacto"
+  ];
+
+  // List of active floating log objects
+  const activeLogs = [];
+  const maxActiveLogs = 22; // Keep it clean and subtle
+
+  class FloatingLog {
+    constructor(isInitial = false) {
+      this.text = logsList[Math.floor(Math.random() * logsList.length)];
+      this.x = Math.random() * (width - 150) + 50;
+      // If initial, scatter across screen; if new, start near bottom
+      this.y = isInitial ? Math.random() * height : height + 20;
+      this.speedY = -(Math.random() * 0.4 + 0.2); // Slow upward speed
+      this.speedX = (Math.random() * 0.2 - 0.1); // Subtle lateral drift
+      this.opacity = 0;
+      this.maxOpacity = Math.random() * 0.5 + 0.3; // Limit opacity for subtleness
+      this.fadeState = "in"; // "in", "hold", "out"
+      this.fontSize = Math.floor(Math.random() * 3) + 11; // 11px to 13px
+      
+      // Select color based on current theme and a random factor
+      this.colorType = Math.random(); // 0-0.4: primary, 0.4-0.8: secondary, 0.8-1.0: muted/text
+    }
+
+    update() {
+      this.y += this.speedY;
+      this.x += this.speedX;
+
+      // Handle horizontal boundaries
+      if (this.x < 10 || this.x > width - 10) {
+        this.speedX = -this.speedX;
+      }
+
+      // Handle fade states
+      if (this.fadeState === "in") {
+        this.opacity += 0.005;
+        if (this.opacity >= this.maxOpacity) {
+          this.opacity = this.maxOpacity;
+          this.fadeState = "hold";
+        }
+      } else if (this.fadeState === "hold") {
+        // Start fading out when log reaches top 25% of viewport
+        if (this.y < height * 0.25) {
+          this.fadeState = "out";
+        }
+      } else if (this.fadeState === "out") {
+        this.opacity -= 0.005;
+      }
+    }
+
+    draw() {
+      // Get colors depending on dark/light mode
+      const isDark = document.documentElement.getAttribute("data-theme") !== "light";
+      let baseColor;
+
+      if (isDark) {
+        if (this.colorType < 0.4) {
+          baseColor = `rgba(139, 92, 246, ${this.opacity})`; // Violet
+        } else if (this.colorType < 0.8) {
+          baseColor = `rgba(20, 184, 166, ${this.opacity})`; // Teal
+        } else {
+          baseColor = `rgba(148, 163, 184, ${this.opacity * 0.7})`; // Slate text muted
+        }
+      } else {
+        // Light mode colors (needs to be darker for readability, but still subtle)
+        if (this.colorType < 0.4) {
+          baseColor = `rgba(79, 70, 229, ${this.opacity})`; // Indigo
+        } else if (this.colorType < 0.8) {
+          baseColor = `rgba(13, 148, 136, ${this.opacity})`; // Dark Teal
+        } else {
+          baseColor = `rgba(71, 85, 105, ${this.opacity * 0.7})`; // Dark Slate
+        }
+      }
+
+      ctx.fillStyle = baseColor;
+      ctx.font = `${this.fontSize}px 'JetBrains Mono', monospace`;
+      ctx.fillText(this.text, this.x, this.y);
+    }
+  }
+
+  // Populate initial logs
+  for (let i = 0; i < 15; i++) {
+    activeLogs.push(new FloatingLog(true));
+  }
+
+  // Handle Window Resize
+  window.addEventListener("resize", () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  // Animation Loop
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Update and draw existing logs
+    for (let i = activeLogs.length - 1; i >= 0; i--) {
+      const log = activeLogs[i];
+      log.update();
+      log.draw();
+
+      // Remove fully faded out logs or logs that scrolled off screen
+      if ((log.fadeState === "out" && log.opacity <= 0) || log.y < -20) {
+        activeLogs.splice(i, 1);
+      }
+    }
+
+    // Spawn new logs to maintain max limit
+    if (activeLogs.length < maxActiveLogs && Math.random() < 0.015) {
+      activeLogs.push(new FloatingLog(false));
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 }
