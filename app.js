@@ -616,7 +616,7 @@ function initTechLogsBackground() {
 
   // List of active floating log objects
   const activeLogs = [];
-  const maxActiveLogs = 22; // Keep it clean and subtle
+  const maxActiveLogs = 28; // Keep it clean and subtle
 
   class FloatingLog {
     constructor(isInitial = false) {
@@ -627,9 +627,9 @@ function initTechLogsBackground() {
       this.speedY = -(Math.random() * 0.4 + 0.2); // Slow upward speed
       this.speedX = (Math.random() * 0.2 - 0.1); // Subtle lateral drift
       this.opacity = 0;
-      this.maxOpacity = Math.random() * 0.5 + 0.3; // Limit opacity for subtleness
+      this.maxOpacity = Math.random() * 0.4 + 0.5; // Limit opacity for subtleness
       this.fadeState = "in"; // "in", "hold", "out"
-      this.fontSize = Math.floor(Math.random() * 3) + 11; // 11px to 13px
+      this.fontSize = Math.floor(Math.random() * 4) + 13; // 13px to 16px
       
       // Select color based on current theme and a random factor
       this.colorType = Math.random(); // 0-0.4: primary, 0.4-0.8: secondary, 0.8-1.0: muted/text

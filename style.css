@@ -1446,27 +1446,27 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.07;
+  opacity: 0.18;
   z-index: -4;
   pointer-events: none;
   transition: opacity var(--transition-normal);
 }
 [data-theme="light"] .tech-logs-canvas {
-  opacity: 0.025;
+  opacity: 0.06;
 }
 
 .glow-orb {
   position: absolute;
   border-radius: 50%;
   filter: blur(140px);
-  opacity: 0.22;
+  opacity: 0.35;
   mix-blend-mode: screen;
   pointer-events: none;
   z-index: -3;
   transition: background-color var(--transition-normal), opacity var(--transition-normal);
 }
 [data-theme="light"] .glow-orb {
-  opacity: 0.06;
+  opacity: 0.12;
   mix-blend-mode: multiply;
   filter: blur(120px);
 }
@@ -1511,12 +1511,12 @@ body::before {
 .float-icon {
   position: absolute;
   color: var(--text-muted);
-  opacity: 0.12;
+  opacity: 0.22;
   transition: opacity var(--transition-normal), color var(--transition-normal);
   filter: drop-shadow(0 0 8px rgba(var(--accent-primary-rgb), 0.15));
 }
 [data-theme="light"] .float-icon {
-  opacity: 0.08;
+  opacity: 0.14;
 }
 .float-icon:hover {
   opacity: 0.35;
