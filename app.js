@@ -130,7 +130,24 @@ const translations = {
     
     // Alert Feedbacks
     "form-success": "¡Mensaje enviado con éxito!",
-    "form-loading": "Enviando mensaje..."
+    "form-loading": "Enviando mensaje...",
+    
+    // Terminal & Modals
+    "term-welcome": "Escribe 'help' para ver los comandos.",
+    "term-help-desc": "Comandos disponibles: help, skills, experience, contact, cv, clear",
+    "term-skills-resp": "Habilidades: C#/.NET Core, Java/Spring Boot, Angular, SQL Server, MySQL, Blazor, Docker.",
+    "term-exp-resp": "Experiencia: Desarrollador de Software en Dirrehum PNP y Soporte de TI en MININTER.",
+    "term-contact-resp": "Contacto: Correo: josuegery@gmail.com | Tel: +51 941442898 | Github: github.com/Josue1202",
+    "term-cv-resp": "CV listo para descargar: Haz clic en el botón 'Descargar CV' en la sección de Sobre Mí.",
+    "term-error": "Comando no reconocido. Escribe 'help' para ver la lista de comandos.",
+    "p-modal-desc-title": "Descripción Detallada",
+    "p-modal-arch-title": "Arquitectura y Enfoque",
+    "p-modal-tech-title": "Tecnologías Clave",
+    "p-modal-db-title": "Base de Datos",
+    "p-modal-feat-title": "Características Clave",
+    "p-modal-btn-code": "Ver Código",
+    "cert-modal-fallback-text": "Tu navegador no soporta la visualización directa de PDFs.",
+    "cert-modal-fallback-btn": "Descargar Certificado"
   },
   en: {
     // Header
@@ -260,7 +277,24 @@ const translations = {
     
     // Alert Feedbacks
     "form-success": "Message sent successfully!",
-    "form-loading": "Sending message..."
+    "form-loading": "Sending message...",
+    
+    // Terminal & Modals
+    "term-welcome": "Type 'help' to see the list of commands.",
+    "term-help-desc": "Available commands: help, skills, experience, contact, cv, clear",
+    "term-skills-resp": "Skills: C#/.NET Core, Java/Spring Boot, Angular, SQL Server, MySQL, Blazor, Docker.",
+    "term-exp-resp": "Experience: Software Developer at Dirrehum PNP & IT Support at MININTER.",
+    "term-contact-resp": "Contact: Email: josuegery@gmail.com | Phone: +51 941442898 | Github: github.com/Josue1202",
+    "term-cv-resp": "CV ready to download: Click on the 'Download CV' button under the About Me section.",
+    "term-error": "Command not recognized. Type 'help' to view available commands.",
+    "p-modal-desc-title": "Detailed Description",
+    "p-modal-arch-title": "Architecture & Focus",
+    "p-modal-tech-title": "Key Technologies",
+    "p-modal-db-title": "Database",
+    "p-modal-feat-title": "Key Features",
+    "p-modal-btn-code": "View Code",
+    "cert-modal-fallback-text": "Your browser does not support viewing PDFs directly.",
+    "cert-modal-fallback-btn": "Download Certificate"
   }
 };
 
@@ -279,6 +313,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Apply initial theme
   document.documentElement.setAttribute("data-theme", currentTheme);
   
+  // Dynamic attribute assignment for progressive enhancement
+  setupElementsDynamicAttributes();
+  
   // Apply initial language translations
   updateLanguageElements(currentLang);
   
@@ -292,6 +329,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initContactForm();
   initActiveNavLinkOnScroll();
   initTechLogsBackground();
+  
+  // New interactive features
+  initGeekTerminal();
+  initCertificateModal();
+  initProjectModal();
+  initScrollProgressAndBackToTop();
 });
 
 /* ==========================================================================
@@ -727,4 +770,457 @@ function initTechLogsBackground() {
   }
 
   animate();
+}
+
+/* ==========================================================================
+   DYNAMIC PROJECT DETAILS DATA
+   ========================================================================== */
+const projectDetails = {
+  es: {
+    estilistaspro: {
+      title: "EstilistasPro (2026)",
+      badge: "Blazor WASM",
+      desc: "Plataforma web premium para estilistas con diseño personalizado \"Luxury Black & Gold\". Contiene portafolio, academia y secciones públicas con animaciones fluidas.",
+      architecture: "Arquitectura cliente-servidor con Blazor WebAssembly, utilizando componentes reutilizables y comunicación directa con APIs RESTful. Estructura modular y limpia orientada a componentes UI responsivos.",
+      database: "Almacenamiento local mediante LocalStorage para la persistencia del tema del usuario, combinada con consultas REST optimizadas a un servidor remoto.",
+      features: ["Academia digital integrada para cursos en línea", "Portafolio fotográfico interactivo con lazy loading", "Temas dinámicos (Oscuro/Claro)", "Fórmula de contacto y reservación directa"],
+      status: "🔒 Repo Privado",
+      codeLink: ""
+    },
+    sistemapolicial: {
+      title: "Sistema Policial v1.0",
+      badge: "Spring Boot",
+      desc: "Sistema modular para operaciones policiales desarrollado bajo una arquitectura de microservicios con separación estricta de responsabilidades por dominio funcional.",
+      architecture: "Arquitectura de microservicios basada en Spring Cloud (Eureka Server para Service Discovery, Spring Cloud API Gateway para enrutamiento y balanceo de carga, y Spring Config Server para configuraciones centralizadas).",
+      database: "Bases de datos independientes por microservicio (Database-per-service pattern) implementadas en MySQL, asegurando independencia y alta disponibilidad.",
+      features: ["Descubrimiento de servicios con Eureka Server", "API Gateway centralizada con filtros JWT de seguridad", "Configuración centralizada con Git", "Comunicación síncrona mediante Feign Clients"],
+      status: "🌐 Ver Repositorio",
+      codeLink: "https://github.com/Josue1202/git-commit--m-Sistema-Policial-v1.0----Microservicios-Operativos"
+    },
+    gestionpersonal: {
+      title: "Gestión de Personal PNP",
+      badge: "Fullstack",
+      desc: "Sistema de gestión integral para personal policial. Cuenta con microservicios especializados para autenticación, gestión del personal y el módulo administrativo de suspendidos.",
+      architecture: "Arquitectura limpia y distribuida compuesta por microservicios en el Backend (Eureka, Gateway, Auth, Personal) y una interfaz de usuario SPA responsiva en el Frontend utilizando Angular 17.",
+      database: "Base de datos relacional PostgreSQL con particionado lógico por microservicio y migraciones estructuradas con Liquibase/Hibernate.",
+      features: ["Autenticación y autorización basada en JWT", "Módulo completo de personal con historial de cargos", "Módulo especializado de Suspendidos", "Consumo asíncrono y componentes reactivos en Angular 17"],
+      status: "🌐 Ver Repositorio",
+      codeLink: "https://github.com/Josue1202/sistema-gestion-pnp"
+    },
+    webgallos: {
+      title: "WebGallos REST API",
+      badge: "Spring Boot + Docker",
+      desc: "API REST y Backoffice administrativo para gestión de competiciones. Documentada con Swagger, pruebas unitarias robustas e integración CI/CD automatizada.",
+      architecture: "Arquitectura MVC clásica basada en Spring Boot 3, implementando Repository Pattern (Spring Data JPA) y DTOs para transferencia segura de datos.",
+      database: "Motor relacional MySQL 8.0 contenedorizado en Docker para entornos de desarrollo y pruebas automatizadas.",
+      features: ["Documentación interactiva de API con Swagger/OpenAPI", "Pruebas unitarias de controladores y servicios con JUnit 5 y Mockito", "Contenedorización Docker y archivo docker-compose listo para producción", "Integración CI/CD básica con GitHub Actions"],
+      status: "🌐 Ver Repositorio",
+      codeLink: "https://github.com/Josue1202/Backend-WebGallos"
+    },
+    backofficelym: {
+      title: "Web Backoffice LYM",
+      badge: "Spring Boot Web",
+      desc: "Aplicación web administrativa e institucional para la gestión y control comercial de la corporación LYM con interfaz de usuario integrada.",
+      architecture: "Arquitectura monolítica MVC modular construida con Spring Boot y renderizado en el servidor mediante el motor de plantillas Thymeleaf, garantizando SEO y carga veloz.",
+      database: "Base de datos SQL Server corporativa con procedimientos almacenados complejos y transacciones controladas por el ORM Hibernate.",
+      features: ["Generación dinámica de vistas HTML con Thymeleaf", "Control de accesos y seguridad por roles", "Módulo de inventarios y control comercial en tiempo real", "Reportes de ventas exportables en Excel y PDF"],
+      status: "🌐 Ver Repositorio",
+      codeLink: "https://github.com/Josue1202/web-backoffice-lym"
+    },
+    reciview: {
+      title: "ReciView & AppFinal",
+      badge: "Android Native",
+      desc: "Aplicaciones móviles nativas desarrolladas para la plataforma Android. Incluye consumo de servicios REST, navegación avanzada y listas optimizadas.",
+      architecture: "Arquitectura limpia MVVM (Model-View-ViewModel) utilizando Kotlin nativo, Android SDK, LiveData y componentes del Jetpack para la arquitectura del ciclo de vida.",
+      database: "Base de datos local SQLite utilizando Room ORM para la persistencia offline de los datos, sincronizada periódicamente con un servidor remoto.",
+      features: ["Consumo de APIs REST utilizando Retrofit 2 y Gson", "Manejo eficiente de listas grandes con RecyclerView y DiffUtil", "Navegación fluida con Android Navigation Component", "Persistencia offline usando Room Database"],
+      status: "🔒 Repo Privado",
+      codeLink: ""
+    }
+  },
+  en: {
+    estilistaspro: {
+      title: "EstilistasPro (2026)",
+      badge: "Blazor WASM",
+      desc: "Premium web platform for stylists with custom \"Luxury Black & Gold\" design. Features portfolio, academy, and public sections with smooth animations.",
+      architecture: "Client-server architecture built on Blazor WebAssembly, leveraging reusable components and direct communication with RESTful APIs. Clean, responsive component-oriented structure.",
+      database: "Local storage persistence via LocalStorage for user theme preferences, combined with optimized REST queries to a remote server.",
+      features: ["Integrated digital academy for online courses", "Interactive photo portfolio with lazy loading", "Dynamic light/dark themes", "Direct booking and contact form"],
+      status: "🔒 Private Repo",
+      codeLink: ""
+    },
+    sistemapolicial: {
+      title: "Police System v1.0",
+      badge: "Spring Boot",
+      desc: "Modular system for police operations developed under a microservices architecture with strict separation of concerns by functional domain.",
+      architecture: "Microservices architecture based on Spring Cloud (Eureka Server for Service Discovery, Spring Cloud API Gateway for routing and load balancing, and Spring Config Server for centralized configuration).",
+      database: "Independent databases per microservice (Database-per-service pattern) implemented in MySQL, ensuring autonomy and high availability.",
+      features: ["Service discovery with Eureka Server", "Centralized API Gateway with secure JWT filters", "Centralized Git configuration server", "Synchronous microservice communication via Feign Clients"],
+      status: "🌐 View Repository",
+      codeLink: "https://github.com/Josue1202/git-commit--m-Sistema-Policial-v1.0----Microservicios-Operativos"
+    },
+    gestionpersonal: {
+      title: "PNP Personnel Management",
+      badge: "Fullstack",
+      desc: "Comprehensive management system for police personnel. Features specialized microservices for authentication, personnel management, and the administrative module of suspended personnel.",
+      architecture: "Clean, distributed architecture composed of Backend microservices (Eureka, Gateway, Auth, Personnel) and a responsive SPA Frontend using Angular 17.",
+      database: "PostgreSQL relational database with logical partitioning per microservice and schema migrations managed by Liquibase/Hibernate.",
+      features: ["JWT-based authentication and authorization", "Complete personnel module with service history", "Specialized administrative module for Suspended personnel", "Asynchronous consumption and reactive UI in Angular 17"],
+      status: "🌐 View Repository",
+      codeLink: "https://github.com/Josue1202/sistema-gestion-pnp"
+    },
+    webgallos: {
+      title: "WebGallos REST API",
+      badge: "Spring Boot + Docker",
+      desc: "REST API and administrative Backoffice for competition management. Documented with Swagger, robust unit tests, and automated CI/CD integration.",
+      architecture: "Classic MVC architecture based on Spring Boot 3, implementing the Repository Pattern (Spring Data JPA) and DTOs for secure data transfer.",
+      database: "MySQL 8.0 database engine containerized in Docker for seamless development and automated testing environments.",
+      features: ["Interactive API documentation with Swagger/OpenAPI", "Robust unit testing of controllers and services using JUnit 5 and Mockito", "Docker containerization and production-ready docker-compose setup", "Basic CI/CD pipeline integrated with GitHub Actions"],
+      status: "🌐 View Repository",
+      codeLink: "https://github.com/Josue1202/Backend-WebGallos"
+    },
+    backofficelym: {
+      title: "Web Backoffice LYM",
+      badge: "Spring Boot Web",
+      desc: "Administrative and institutional web application for commercial management and control of LYM Corporation, with integrated user interface.",
+      architecture: "Monolithic modular MVC architecture built with Spring Boot, rendering views server-side using Thymeleaf template engine for fast load speeds and SEO.",
+      database: "Corporate SQL Server database executing complex stored procedures and database transactions via Hibernate ORM.",
+      features: ["Dynamic HTML view rendering using Thymeleaf", "Role-based access control and security", "Real-time inventory and commercial management", "Exportable sales reports in Excel and PDF formats"],
+      status: "🌐 View Repository",
+      codeLink: "https://github.com/Josue1202/web-backoffice-lym"
+    },
+    reciview: {
+      title: "ReciView & AppFinal",
+      badge: "Android Native",
+      desc: "Native mobile applications developed for the Android platform. Features REST service consumption, advanced navigation, and optimized lists.",
+      architecture: "Clean MVVM (Model-View-ViewModel) architecture utilizing native Kotlin, Android SDK, LiveData, and Jetpack components for lifecycle-aware architecture.",
+      database: "Local SQLite database using Room ORM for offline data persistence, periodically synchronized with a remote server.",
+      features: ["REST API consumption using Retrofit 2 and Gson", "Efficient rendering of large lists with RecyclerView and DiffUtil", "Fluid navigation with Android Navigation Component", "Offline persistence with Room Database"],
+      status: "🔒 Private Repo",
+      codeLink: ""
+    }
+  }
+};
+
+/* ==========================================================================
+   DYNAMIC MAPPING FUNCTIONS
+   ========================================================================== */
+function setupElementsDynamicAttributes() {
+  const projectCards = document.querySelectorAll(".project-card");
+  const projectIds = ["estilistaspro", "sistemapolicial", "gestionpersonal", "webgallos", "backofficelym", "reciview"];
+  
+  projectCards.forEach((card, index) => {
+    if (projectIds[index]) {
+      card.setAttribute("data-project", projectIds[index]);
+      card.style.cursor = "pointer";
+    }
+  });
+
+  const certButtons = document.querySelectorAll("#certifications .btn-secondary");
+  certButtons.forEach((btn, index) => {
+    btn.classList.add("cert-view-btn");
+    btn.setAttribute("data-index", index);
+  });
+}
+
+/* ==========================================================================
+   INTERACTIVE GEEK TERMINAL LOGIC
+   ========================================================================== */
+function initGeekTerminal() {
+  const input = document.getElementById("terminal-input");
+  const output = document.getElementById("terminal-output");
+  if (!input || !output) return;
+
+  // Set autofocus behavior on terminal click
+  const terminalCard = document.querySelector(".terminal-card");
+  if (terminalCard) {
+    terminalCard.addEventListener("click", () => {
+      input.focus();
+    });
+  }
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const command = input.value.trim().toLowerCase();
+      input.value = "";
+      
+      // Append user command line
+      const userLine = document.createElement("p");
+      userLine.className = "terminal-line user-input";
+      userLine.innerHTML = `<span class="terminal-prompt">josue@dev:~$</span> ${command}`;
+      output.appendChild(userLine);
+      
+      // Process Command
+      const responseLine = document.createElement("p");
+      responseLine.className = "terminal-line";
+      
+      if (command === "clear") {
+        output.innerHTML = "";
+        return;
+      } else if (command === "help") {
+        responseLine.className += " system";
+        responseLine.textContent = translations[currentLang]["term-help-desc"];
+      } else if (command === "skills") {
+        responseLine.className += " info";
+        responseLine.textContent = translations[currentLang]["term-skills-resp"];
+      } else if (command === "experience") {
+        responseLine.className += " info";
+        responseLine.textContent = translations[currentLang]["term-exp-resp"];
+      } else if (command === "contact") {
+        responseLine.className += " success";
+        responseLine.textContent = translations[currentLang]["term-contact-resp"];
+      } else if (command === "cv") {
+        responseLine.className += " success";
+        responseLine.textContent = translations[currentLang]["term-cv-resp"];
+      } else if (command === "") {
+        return; // Empty line
+      } else {
+        responseLine.className += " warning";
+        responseLine.textContent = translations[currentLang]["term-error"];
+      }
+      
+      output.appendChild(responseLine);
+      output.scrollTop = output.scrollHeight; // Scroll to bottom
+    }
+  });
+}
+
+/* ==========================================================================
+   CERTIFICATES MODAL & CAROUSEL
+   ========================================================================== */
+function initCertificateModal() {
+  const modal = document.getElementById("cert-modal");
+  const iframe = document.getElementById("cert-iframe");
+  const fallback = document.querySelector(".cert-modal-fallback");
+  const fallbackLink = document.getElementById("cert-fallback-link");
+  const titleEl = document.getElementById("cert-modal-title");
+  const issuerEl = document.getElementById("cert-modal-issuer");
+  const closeBtn = document.getElementById("cert-modal-close");
+  const backdrop = modal ? modal.querySelector(".modal-backdrop") : null;
+  const prevBtn = document.getElementById("cert-prev-btn");
+  const nextBtn = document.getElementById("cert-next-btn");
+
+  if (!modal || !iframe || !closeBtn) return;
+
+  const certsData = [
+    { title: "Power BI - Nivel Básico", issuer: "UNI", src: "assets/certificates/powerbi-uni.pdf" },
+    { title: "Egresado en Computación e Informática", issuer: "Cibertec", src: "assets/certificates/cibertec-egresado.pdf" },
+    { title: "Formación Java y Spring Boot G5 - ONE", issuer: "Alura Latam | Oracle Next Education", src: "assets/certificates/alura-java-springboot-one.pdf" },
+    { title: "Java Orientado a Objetos G5 - ONE", issuer: "Alura Latam | Oracle Next Education", src: "assets/certificates/alura-java-oop.pdf" },
+    { title: "Programa Oracle Next Education - Final", issuer: "Alura Latam | Oracle Next Education", src: "assets/certificates/alura-final-programa.pdf" },
+    { title: "Formación Emprendimiento G5 - ONE", issuer: "Alura Latam | Oracle Next Education", src: "assets/certificates/alura-emprendimiento.pdf" },
+    { title: "Business Agility - Frameworks Ágiles", issuer: "Alura Latam | Oracle Next Education", src: "assets/certificates/alura-business-agility.pdf" },
+    { title: "Integración Java con Bases de Datos", issuer: "Alura Latam", src: "assets/certificates/alura-java-db.pdf" },
+    { title: "Formación Java y Spring Boot", issuer: "Alura Latam", src: "assets/certificates/alura-java-springboot.pdf" },
+    { title: "Principiante en Programación G5 - ONE", issuer: "Alura Latam | Oracle Next Education", src: "assets/certificates/alura-principiante-prog.pdf" },
+    { title: "Desarrollo Personal G5 - ONE", issuer: "Alura Latam | Oracle Next Education", src: "assets/certificates/alura-desarrollo-personal.pdf" },
+    { title: "Certificado de Formación Alura Latam", issuer: "Alura Latam", src: "assets/certificates/alura-latam-general.pdf" },
+    { title: "Introduction to IoT (Internet of Things)", issuer: "Cisco | Cibertec", src: "assets/certificates/iot-cisco.pdf" }
+  ];
+
+  let activeIndex = 0;
+
+  function openModal(index) {
+    activeIndex = index;
+    updateModalContent();
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden"; // Prevent scrolling behind modal
+  }
+
+  function closeModal() {
+    modal.classList.add("hidden");
+    iframe.src = ""; // Stop loading/playing PDF when closed
+    document.body.style.overflow = ""; // Re-enable scrolling
+  }
+
+  function updateModalContent() {
+    const cert = certsData[activeIndex];
+    if (!cert) return;
+
+    // Load PDF source
+    iframe.src = cert.src;
+    fallbackLink.href = cert.src;
+
+    // Translate title
+    const langTitleKey = `cert${activeIndex + 1}-name`;
+    titleEl.textContent = translations[currentLang][langTitleKey] || cert.title;
+    
+    // Set issuer
+    issuerEl.textContent = cert.issuer;
+
+    // Mobile fallback (optional if iframe doesn't work, show fallback layout)
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      iframe.classList.add("hidden");
+      fallback.classList.remove("hidden");
+    } else {
+      iframe.classList.remove("hidden");
+      fallback.classList.add("hidden");
+    }
+  }
+
+  function showNext() {
+    activeIndex = (activeIndex + 1) % certsData.length;
+    updateModalContent();
+  }
+
+  function showPrev() {
+    activeIndex = (activeIndex - 1 + certsData.length) % certsData.length;
+    updateModalContent();
+  }
+
+  // Bind Clicks dynamically
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".cert-view-btn");
+    if (btn) {
+      e.preventDefault();
+      const index = parseInt(btn.getAttribute("data-index"));
+      openModal(index);
+    }
+  });
+
+  closeBtn.addEventListener("click", closeModal);
+  if (backdrop) backdrop.addEventListener("click", closeModal);
+  prevBtn.addEventListener("click", showPrev);
+  nextBtn.addEventListener("click", showNext);
+
+  // Keyboard navigation
+  document.addEventListener("keydown", (e) => {
+    if (modal.classList.contains("hidden")) return;
+    
+    if (e.key === "Escape") {
+      closeModal();
+    } else if (e.key === "ArrowRight") {
+      showNext();
+    } else if (e.key === "ArrowLeft") {
+      showPrev();
+    }
+  });
+}
+
+/* ==========================================================================
+   PROJECTS DETAILED MODAL LOGIC
+   ========================================================================== */
+function initProjectModal() {
+  const modal = document.getElementById("project-modal");
+  const closeBtn = document.getElementById("project-modal-close");
+  const backdrop = modal ? modal.querySelector(".modal-backdrop") : null;
+
+  if (!modal || !closeBtn) return;
+
+  const titleEl = document.getElementById("project-modal-title");
+  const badgeEl = document.getElementById("project-modal-badge");
+  const descEl = document.getElementById("project-modal-desc");
+  const archEl = document.getElementById("project-modal-architecture");
+  const dbEl = document.getElementById("project-modal-database");
+  const techContainer = document.getElementById("project-modal-tech");
+  const featuresList = document.getElementById("project-modal-features");
+  const statusEl = document.getElementById("project-modal-status");
+  const linkEl = document.getElementById("project-modal-link");
+
+  function openProjectModal(projectId) {
+    const details = projectDetails[currentLang][projectId];
+    if (!details) return;
+
+    titleEl.textContent = details.title;
+    badgeEl.textContent = details.badge;
+    descEl.textContent = details.desc;
+    archEl.textContent = details.architecture;
+    dbEl.textContent = details.database;
+
+    // Load Tech Spans
+    techContainer.innerHTML = "";
+    const projectCard = document.querySelector(`[data-project="${projectId}"]`);
+    if (projectCard) {
+      const techSpans = projectCard.querySelectorAll(".project-tech span");
+      techSpans.forEach(span => {
+        const spanClone = span.cloneNode(true);
+        techContainer.appendChild(spanClone);
+      });
+    }
+
+    // Load Features
+    featuresList.innerHTML = "";
+    details.features.forEach(feat => {
+      const li = document.createElement("li");
+      li.textContent = feat;
+      featuresList.appendChild(li);
+    });
+
+    // Code link button display
+    if (details.codeLink) {
+      linkEl.href = details.codeLink;
+      linkEl.classList.remove("hidden");
+      statusEl.classList.add("hidden");
+    } else {
+      linkEl.classList.add("hidden");
+      statusEl.classList.remove("hidden");
+      statusEl.textContent = translations[currentLang]["repo-private"];
+    }
+
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeProjectModal() {
+    modal.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  // Click on project card
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest("[data-project]");
+    // Check if the click wasn't on a repository link inside card footer
+    if (card && !e.target.closest(".project-link")) {
+      const projectId = card.getAttribute("data-project");
+      openProjectModal(projectId);
+    }
+  });
+
+  closeBtn.addEventListener("click", closeProjectModal);
+  if (backdrop) backdrop.addEventListener("click", closeProjectModal);
+
+  document.addEventListener("keydown", (e) => {
+    if (modal.classList.contains("hidden")) return;
+    if (e.key === "Escape") {
+      closeProjectModal();
+    }
+  });
+}
+
+/* ==========================================================================
+   SCROLL PROGRESS & BACK TO TOP BUTTON LOGIC
+   ========================================================================== */
+function initScrollProgressAndBackToTop() {
+  const progressBar = document.getElementById("scroll-progress");
+  const backToTopBtn = document.getElementById("back-to-top");
+
+  window.addEventListener("scroll", () => {
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    
+    // Update scroll progress bar
+    if (progressBar && height > 0) {
+      const scrolled = (winScroll / height) * 100;
+      progressBar.style.width = scrolled + "%";
+    }
+
+    // Toggle Back to Top Button
+    if (backToTopBtn) {
+      if (winScroll > 400) {
+        backToTopBtn.classList.remove("hidden");
+      } else {
+        backToTopBtn.classList.add("hidden");
+      }
+    }
+  });
+
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
 }
