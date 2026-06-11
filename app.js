@@ -47,6 +47,22 @@ const translations = {
     "skills-cat-int": "Nivel Intermedio",
     "skills-cat-basic": "Nivel Básico / Familiar",
     
+    // Certifications
+    "nav-certs": "Certificados",
+    "certs-title": "Certificaciones y Logros",
+    "certs-subtitle": "Validaciones académicas y profesionales que respaldan mis conocimientos técnicos",
+    "cert1-name": "Formación Java y Spring Boot",
+    "cert1-desc": "Especialización intensiva en desarrollo Backend con Java, Spring Boot 3, JPA, Hibernate, validación de APIs REST, autenticación JWT, y despliegue.",
+    "cert2-name": "Power BI - Nivel Básico",
+    "cert2-desc": "Capacitación oficial en modelado de datos, creación de tableros de control interactivos, carga y transformación de datos (Power Query) y lenguaje DAX.",
+    "cert3-name": "Egresado en Computación e Informática",
+    "cert3-desc": "Constancia oficial de egresado de la carrera técnica profesional de tres años, con especialización en desarrollo de software y sistemas de información.",
+    "cert4-name": "Business Agility - Frameworks Ágiles",
+    "cert4-desc": "Formación orientada a metodologías de trabajo ágil, Scrum, Kanban, gestión de equipos auto-organizados y adaptación rápida al cambio organizacional.",
+    "cert5-name": "Introduction to IoT",
+    "cert5-desc": "Curso introductorio oficial sobre el ecosistema de Internet de las Cosas, digitalización, interconexión de dispositivos inteligentes y conceptos de red.",
+    "cert-btn-view": "Ver Certificado",
+    
     // Experience
     "exp-title": "Trayectoria Profesional",
     "exp-subtitle": "Mi experiencia laboral en el sector tecnológico público e institucional",
@@ -144,6 +160,22 @@ const translations = {
     "skills-cat-adv": "Advanced Level",
     "skills-cat-int": "Intermediate Level",
     "skills-cat-basic": "Basic / Familiar Level",
+    
+    // Certifications
+    "nav-certs": "Certifications",
+    "certs-title": "Certifications & Achievements",
+    "certs-subtitle": "Academic and professional validations that back my technical skills",
+    "cert1-name": "Java & Spring Boot Training",
+    "cert1-desc": "Intensive specialization in Backend development with Java, Spring Boot 3, JPA, Hibernate, REST API validation, JWT authentication, and deployment.",
+    "cert2-name": "Power BI - Basic Level",
+    "cert2-desc": "Official training in data modeling, interactive dashboard creation, data loading and transformation (Power Query), and DAX language.",
+    "cert3-name": "Computer Science Graduate",
+    "cert3-desc": "Official technical degree completion certificate for the three-year professional program, specialized in software development and information systems.",
+    "cert4-name": "Business Agility - Agile Frameworks",
+    "cert4-desc": "Training focused on agile working methodologies, Scrum, Kanban, self-organized team management, and quick organizational change adaptation.",
+    "cert5-name": "Introduction to IoT",
+    "cert5-desc": "Official introductory course on the Internet of Things ecosystem, digitalization, smart device interconnection, and networking concepts.",
+    "cert-btn-view": "View Certificate",
     
     // Experience
     "exp-title": "Professional Experience",

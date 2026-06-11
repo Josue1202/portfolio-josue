@@ -43,6 +43,7 @@
         <a href="#home" class="nav-link active" data-i18n="nav-home">Inicio</a>
         <a href="#about" class="nav-link" data-i18n="nav-about">Sobre Mí</a>
         <a href="#skills" class="nav-link" data-i18n="nav-skills">Habilidades</a>
+        <a href="#certifications" class="nav-link" data-i18n="nav-certs">Certificados</a>
         <a href="#experience" class="nav-link" data-i18n="nav-experience">Experiencia</a>
         <a href="#projects" class="nav-link" data-i18n="nav-projects">Proyectos</a>
         <a href="#contact" class="nav-link" data-i18n="nav-contact">Contacto</a>
@@ -324,8 +325,73 @@
     </div>
   </section>
 
+  <!-- Certificaciones Section -->
+  <section id="certifications" class="certifications-section section-padding bg-alt">
+    <div class="container">
+      <h2 class="section-title text-center scroll-reveal" data-i18n="certs-title">Certificaciones y Logros</h2>
+      <p class="section-subtitle text-center scroll-reveal" data-i18n="certs-subtitle">Validaciones académicas y profesionales que respaldan mis conocimientos técnicos</p>
+      
+      <div class="certs-grid scroll-reveal">
+        <!-- Cert 1: Java & Spring Boot -->
+        <div class="cert-card glass-card">
+          <div class="cert-icon-wrapper">🎓</div>
+          <div class="cert-details">
+            <h3 class="cert-name" data-i18n="cert1-name">Formación Java y Spring Boot</h3>
+            <span class="cert-issuer">Alura Latam | Oracle Next Education</span>
+            <p class="cert-desc" data-i18n="cert1-desc">Especialización intensiva en desarrollo Backend con Java, Spring Boot 3, JPA, Hibernate, validación de APIs REST, autenticación JWT, y despliegue.</p>
+            <a href="assets/certificates/java-springboot-alura.pdf" target="_blank" class="btn btn-secondary btn-sm" data-i18n="cert-btn-view">Ver Certificado</a>
+          </div>
+        </div>
+
+        <!-- Cert 2: Power BI -->
+        <div class="cert-card glass-card">
+          <div class="cert-icon-wrapper">📊</div>
+          <div class="cert-details">
+            <h3 class="cert-name" data-i18n="cert2-name">Power BI - Nivel Básico</h3>
+            <span class="cert-issuer">Universidad Nacional de Ingeniería (UNI)</span>
+            <p class="cert-desc" data-i18n="cert2-desc">Capacitación oficial en modelado de datos, creación de tableros de control interactivos, carga y transformación de datos (Power Query) y lenguaje DAX.</p>
+            <a href="assets/certificates/powerbi-uni.pdf" target="_blank" class="btn btn-secondary btn-sm" data-i18n="cert-btn-view">Ver Certificado</a>
+          </div>
+        </div>
+
+        <!-- Cert 3: Egresado Cibertec -->
+        <div class="cert-card glass-card">
+          <div class="cert-icon-wrapper">🏫</div>
+          <div class="cert-details">
+            <h3 class="cert-name" data-i18n="cert3-name">Egresado en Computación e Informática</h3>
+            <span class="cert-issuer">Instituto Superior Tecnológico Cibertec</span>
+            <p class="cert-desc" data-i18n="cert3-desc">Constancia oficial de egresado de la carrera técnica profesional de tres años, con especialización en desarrollo de software y sistemas de información.</p>
+            <a href="assets/certificates/cibertec-egresado.pdf" target="_blank" class="btn btn-secondary btn-sm" data-i18n="cert-btn-view">Ver Certificado</a>
+          </div>
+        </div>
+
+        <!-- Cert 4: Business Agility -->
+        <div class="cert-card glass-card">
+          <div class="cert-icon-wrapper">⚡</div>
+          <div class="cert-details">
+            <h3 class="cert-name" data-i18n="cert4-name">Business Agility - Frameworks Ágiles</h3>
+            <span class="cert-issuer">Alura Latam | Oracle Next Education</span>
+            <p class="cert-desc" data-i18n="cert4-desc">Formación orientada a metodologías de trabajo ágil, Scrum, Kanban, gestión de equipos auto-organizados y adaptación rápida al cambio organizacional.</p>
+            <a href="assets/certificates/business-agility-alura.pdf" target="_blank" class="btn btn-secondary btn-sm" data-i18n="cert-btn-view">Ver Certificado</a>
+          </div>
+        </div>
+
+        <!-- Cert 5: IoT -->
+        <div class="cert-card glass-card">
+          <div class="cert-icon-wrapper">🌐</div>
+          <div class="cert-details">
+            <h3 class="cert-name" data-i18n="cert5-name">Introduction to IoT (Internet of Things)</h3>
+            <span class="cert-issuer">Cisco Networking Academy | Cibertec</span>
+            <p class="cert-desc" data-i18n="cert5-desc">Curso introductorio oficial sobre el ecosistema de Internet de las Cosas, digitalización, interconexión de dispositivos inteligentes y conceptos de red.</p>
+            <a href="assets/certificates/iot-cisco.pdf" target="_blank" class="btn btn-secondary btn-sm" data-i18n="cert-btn-view">Ver Certificado</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Experiencia Section -->
-  <section id="experience" class="experience-section section-padding bg-alt">
+  <section id="experience" class="experience-section section-padding">
     <div class="container">
       <h2 class="section-title text-center scroll-reveal" data-i18n="exp-title">Trayectoria Profesional</h2>
       <p class="section-subtitle text-center scroll-reveal" data-i18n="exp-subtitle">Mi experiencia laboral en el sector tecnológico público e institucional</p>
@@ -387,7 +453,7 @@
   </section>
 
   <!-- Proyectos Section -->
-  <section id="projects" class="projects-section section-padding">
+  <section id="projects" class="projects-section section-padding bg-alt">
     <div class="container">
       <h2 class="section-title text-center scroll-reveal" data-i18n="proj-title">Proyectos Destacados</h2>
       <p class="section-subtitle text-center scroll-reveal" data-i18n="proj-subtitle">Una muestra de mis proyectos de software más relevantes. Filtra por tecnología para explorarlos.</p>
@@ -544,7 +610,7 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="contact-section section-padding bg-alt">
+  <section id="contact" class="contact-section section-padding">
     <div class="container">
       <h2 class="section-title text-center scroll-reveal" data-i18n="contact-title">Contacto</h2>
       <p class="section-subtitle text-center scroll-reveal" data-i18n="contact-subtitle">¿Tienes algún proyecto en mente o buscas incorporar un programador a tu equipo? ¡Escríbeme!</p>
