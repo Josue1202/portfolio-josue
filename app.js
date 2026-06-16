@@ -306,8 +306,18 @@ const typingWords = {
 /* ==========================================================================
    GLOBAL STATE & INITIALIZATION
    ========================================================================== */
-let currentLang = localStorage.getItem("lang") || "es";
-let currentTheme = localStorage.getItem("theme") || "dark";
+let currentLang = "es";
+let currentTheme = "dark";
+try {
+  currentLang = localStorage.getItem("lang") || "es";
+} catch (e) {
+  console.warn("localStorage is not accessible:", e);
+}
+try {
+  currentTheme = localStorage.getItem("theme") || "dark";
+} catch (e) {
+  console.warn("localStorage is not accessible:", e);
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   // Apply initial theme
@@ -346,7 +356,11 @@ function initThemeToggle() {
   themeToggle.addEventListener("click", () => {
     const newTheme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
+    try {
+      localStorage.setItem("theme", newTheme);
+    } catch (e) {
+      console.warn("localStorage write failed:", e);
+    }
     currentTheme = newTheme;
   });
 }
@@ -360,7 +374,11 @@ function initLanguageToggle() {
   langToggle.addEventListener("click", () => {
     const newLang = currentLang === "es" ? "en" : "es";
     currentLang = newLang;
-    localStorage.setItem("lang", newLang);
+    try {
+      localStorage.setItem("lang", newLang);
+    } catch (e) {
+      console.warn("localStorage write failed:", e);
+    }
     
     // Toggle button label (shows the OTHER language available to switch to)
     langToggle.querySelector(".lang-label").textContent = newLang === "es" ? "EN" : "ES";
@@ -368,8 +386,13 @@ function initLanguageToggle() {
     // Update texts with fade transition
     document.body.style.opacity = 0;
     setTimeout(() => {
-      updateLanguageElements(newLang);
-      document.body.style.opacity = 1;
+      try {
+        updateLanguageElements(newLang);
+      } catch (err) {
+        console.error("Error updating language elements:", err);
+      } finally {
+        document.body.style.opacity = 1;
+      }
     }, 200);
   });
   
@@ -605,7 +628,8 @@ function initActiveNavLinkOnScroll() {
   });
   
   function varHeaderOffset() {
-    return window.innerWidth <= 768 ? 80 : 100;
+    const header = document.querySelector('.header');
+    return header ? header.offsetHeight : 80;
   }
 }
 
