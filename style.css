@@ -459,6 +459,7 @@ button {
   display: flex;
   gap: 16px;
   margin-bottom: 48px;
+  flex-wrap: wrap;
 }
 
 .hero-socials {
@@ -1467,6 +1468,26 @@ a.info-item:hover .info-val {
   }
   
   .lang-label {
+    font-size: 0.8rem;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .cert-card {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .project-filters {
+    gap: 8px;
+    margin-bottom: 30px;
+  }
+
+  .filter-btn {
+    padding: 8px 16px;
     font-size: 0.8rem;
   }
 }
